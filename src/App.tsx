@@ -1,12 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Sidebar from './components/Sidebar';
+import { BrowserRouter as Router, Route, useLocation } from "react-router-dom";
+
+import { Login } from "./pages";
+import Layout from "./components/Layout";
 
 function App() {
   return (
     <main>
-      <Sidebar />
+      <Login />
+      {/* <Layout>
+          <div>
+          </div>
+      </Layout> */}
     </main>
   );
 }
