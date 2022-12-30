@@ -25,7 +25,7 @@ const Tabs: React.FC<Props> = ({ children }) => {
         </div>
        
       </ul>
-      {children[selectedTab]}
+      <div className="single_tab">{children[selectedTab]}</div>
     </>
   )
 }
