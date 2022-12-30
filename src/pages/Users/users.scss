@@ -1,0 +1,5 @@
+@import 'assets/styles/index.scss';
+
+.users__wrapper { }
+.users__wrapper .heading { font-weight: normal; font-size: 24px; color: $navy-blue; font-weight: 500; padding-bottom: 40px; }
+.users__wrapper .cards__wrapper { display: flex; align-items: flex-start; justify-content: space-between;}

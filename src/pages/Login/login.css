@@ -30,6 +30,11 @@ body {
   padding-top: 79px;
 }
 
+.login__content > div {
+  max-width: 447px;
+  width: 100%;
+}
+
 .login__content > div > h1 {
   font-size: 40px;
   color: #213F7D;
@@ -74,5 +79,55 @@ body {
 
 .login__content > div > form .btn__padding {
   padding: 16px 0;
+}
+
+.login__content > div > form .password__styles {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 18px;
+  color: #545F7D !important;
+  border: 1px solid #545F7D26;
+  border-radius: 5px;
+  height: 50px;
+  margin-bottom: 24px;
+}
+
+.login__content > div > form .password__styles > .input__styles {
+  all: unset;
+  width: 100%;
+}
+
+.login__content > div > form .password__styles > span {
+  color: #39CDCC;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+  .login__wrapper {
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .login__content > svg {
+    display: none;
+  }
+  .login__content > div {
+    max-width: 100%;
+  }
+  .login__content > div > h1 {
+    font-size: 28px;
+  }
+  .login__content > div > article {
+    font-size: 16px;
+    padding: 15px 0 30px 0;
+  }
 }
 /*# sourceMappingURL=login.css.map */

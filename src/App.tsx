@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, useLocation } from "react-router-dom";
 
-import { Login } from "./pages";
+import { Login, Dashboard, Users } from "./pages";
 import Layout from "./components/Layout";
 
 function App() {
@@ -8,8 +8,7 @@ function App() {
     <main>
       <Login />
       {/* <Layout>
-          <div>
-          </div>
+        <Users />
       </Layout> */}
     </main>
   );

@@ -3,16 +3,18 @@ import Sidebar from '../Sidebar/index'
 import Navbar from '../Navbar/index'
 
 interface Props {
-    children: any
+  children: any
 }
 
 
 const Layout = ({ children }: Props) => {
   return (
-    <div className='layout-wrapper'>
+    <div className='layout__wrapper'>
       <Navbar />
-        <Sidebar />
-        {children}
+      <Sidebar />
+      <div className='children__display'>
+      {children}
+      </div>
     </div>
   )
 }
