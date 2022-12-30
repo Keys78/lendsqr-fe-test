@@ -2,12 +2,25 @@ import ActiveUsersIcon from 'components/Icons/ActiveUsersIcon';
 import UserLoansIcon from 'components/Icons/UserLoansIcon';
 import UserSavings from 'components/Icons/UserSavings';
 import UsersIcon from 'components/Icons/UsersIcon';
-import UserCards from '../../components/UserCards/index'
+import UserCards from 'components/UserCards/index'
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import '../Users/users.scss'
+import { useEffect } from 'react';
+import { getAllUsers } from 'features/users/usersSlice';
 
 
 
-const index = () => {
+
+const Index = () => {
+  const dispatch = useAppDispatch()
+  const { allUsers, isError, message } = useAppSelector((state: any) => state.users)
+  console.log(getAllUsers)
+
+
+  useEffect(() => {
+    dispatch(getAllUsers())
+  }, [])
+
   const cardInfo: { title: string; data: string; icon: any }[] = [
     {
       title: 'users',
@@ -42,9 +55,16 @@ const index = () => {
         <div className='cards__wrapper'>
           {renderCards}
         </div>
+        <div>
+          {allUsers.map((val: any, i: any) => (
+            <div key={i}>
+              <p>{val.userName}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
 }
 
-export default index
+export default Index
