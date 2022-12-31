@@ -129,6 +129,16 @@ const navLinks: { title: string; icon: string; href: string, category: string }[
    
 ]
 
+const headings: { title: string; }[] = [
+    { title: "Organisation" },
+    { title: "Username" },
+    { title: "Email" },
+    { title: "Phone Number" },
+    { title: "Date Joined" },
+    { title: "Status" }
+]
+
 export {
-    navLinks
+    navLinks,
+    headings
 }

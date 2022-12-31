@@ -1,6 +1,12 @@
+import ActivateUserIcon from 'components/Icons/ActivateUserIcon';
+import BlackListIcon from 'components/Icons/BlackListIcon';
 import Ellipsis from 'components/Icons/Ellipsis';
+import EyeIcon from 'components/Icons/EyeIcon';
 import SortIcon from 'components/Icons/SortIcon';
-import { formatDate } from 'utils/helpers';
+import { useState, useRef } from 'react';
+import { headings } from 'utils/data';
+import { characterLimit, formatDate } from 'utils/helpers';
+import useOnClickOutside from 'hooks/useOnClickOutside';
 import '../Users/users.scss'
 
 
@@ -9,28 +15,37 @@ interface Props {
 }
 
 const UsersTable = ({ tableData }: Props) => {
-    const headings: { title: string; }[] = [
-        { title: "Organisation" },
-        { title: "Username" },
-        { title: "Email" },
-        { title: "Phone Number" },
-        { title: "Date Joined" },
-        { title: "Status" }
-    ]
+    const [activeIndex, setActiveIndex] = useState<any>('')
+    const promptModalRef = useRef<HTMLDivElement>(null);
+    const clickOutsidehandler = () => { setActiveIndex('') };
+    useOnClickOutside(promptModalRef, clickOutsidehandler);
+
+    const viewDetails = (user : any) => {
+        
+    }
+
 
     const renderTableHeadings = headings.map((val: any, i: number) => (
         <th key={i}> <span className='table__headings'>{val.title}&nbsp;<SortIcon /></span> </th>
     ))
 
-    const renderUsers = tableData.map((user: any ,  i: number) => (
+    const renderUsers = tableData.map((user: any, i: number) => (
         <tr key={i}>
-            <td>{ user.orgName} </td>
-            <td>{ user.userName}</td>
-            <td>{ user.email}</td>
-            <td>{ user.phoneNumber}</td>
+            <td className='row__data'>{characterLimit(user.orgName, 24)} </td>
+            <td>{user.userName}</td>
+            <td>{characterLimit(user.email, 20)}</td>
+            <td>{user.phoneNumber}</td>
             <td>{formatDate(user.createdAt)}</td>
             <td>Active</td>
-            <td><Ellipsis /></td>
+            <td onClick={() => setActiveIndex(i)} className='action__group'><Ellipsis />
+                {activeIndex === i &&
+                    <div ref={promptModalRef} className='action__prompt'>
+                        <div onClick={() => viewDetails(user)}><EyeIcon /> View Details</div>
+                        <div><BlackListIcon /> Blacklist User</div>
+                        <div><ActivateUserIcon /> Activate User</div>
+                    </div>
+                }
+            </td>
         </tr>
     ))
 
@@ -43,7 +58,7 @@ const UsersTable = ({ tableData }: Props) => {
                     </tr>
                 </thead>
                 <tbody>
-                   { renderUsers }
+                    {renderUsers}
                 </tbody>
             </table>
         </section>
