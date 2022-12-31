@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import '../Users/users.scss'
 import { useEffect } from 'react';
 import { getAllUsers } from 'features/users/usersSlice';
+import UsersTable from './UsersTable';
 
 
 
@@ -14,7 +15,6 @@ import { getAllUsers } from 'features/users/usersSlice';
 const Index = () => {
   const dispatch = useAppDispatch()
   const { allUsers, isError, message } = useAppSelector((state: any) => state.users)
-  console.log(getAllUsers)
 
 
   useEffect(() => {
@@ -56,11 +56,12 @@ const Index = () => {
           {renderCards}
         </div>
         <div>
-          {allUsers.map((val: any, i: any) => (
+          {/* {allUsers.map((val: any, i: any) => (
             <div key={i}>
               <p>{val.userName}</p>
             </div>
-          ))}
+          ))} */}
+          <UsersTable tableData={allUsers}/>
         </div>
       </div>
     </section>

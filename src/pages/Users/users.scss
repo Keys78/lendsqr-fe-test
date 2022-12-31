@@ -3,3 +3,28 @@
 .users__wrapper { }
 .users__wrapper .heading { font-weight: normal; font-size: 24px; color: $navy-blue; font-weight: 500; padding-bottom: 40px; }
 .users__wrapper .cards__wrapper { display: flex; align-items: flex-start; justify-content: space-between;}
+
+.table__container { margin-top: 40px;}
+
+.table__wrapper { background: #FFFFFF;
+    border: 1px solid rgba(33, 63, 125, 0.06);
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 4px;}
+    
+.table__wrapper > thead { text-align: left;
+    // padding:40px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $gray-hard;
+    white-space:nowrap ;}
+
+.table__wrapper > tbody { text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    color: $gray-hard;
+    white-space:nowrap ;
+    padding: 30px 0 16px 30px;
+}
+
+    .table__wrapper .table__headings {padding: 30px 0 16px 30px; color: red !important; display: flex; align-items: flex-end; }

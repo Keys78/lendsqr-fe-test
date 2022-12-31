@@ -10,7 +10,6 @@ const getAllUsers = async () => {
     },
   }
   const response = await axios.get(`${USERS_API_URL + 'users'}`, config)
-  console.log('data', response)
   return response
 }
 

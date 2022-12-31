@@ -8,8 +8,8 @@ function App() {
     <main className="page__wrapper">
       {/* <Login /> */}
       <Layout>
-        {/* <Users /> */}
-        <UserDetails />
+        <Users />
+        {/* <UserDetails /> */}
       </Layout>
     </main>
   );
