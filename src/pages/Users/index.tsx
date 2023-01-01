@@ -8,6 +8,7 @@ import '../Users/users.scss'
 import { useEffect } from 'react';
 import { getAllUsers } from 'features/users/usersSlice';
 import UsersTable from './UsersTable';
+import ReactPaginate from 'react-paginate';
 
 
 
@@ -45,7 +46,9 @@ const Index = () => {
   ]
 
   const renderCards = cardInfo.map((card, i) => (
-    <UserCards key={i} card={card} />
+    <UserCards 
+   
+    key={i} i={i} card={card} />
   ))
 
   return (

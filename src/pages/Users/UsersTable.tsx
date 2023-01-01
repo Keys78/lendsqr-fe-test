@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from 'react';
 import { headings } from 'utils/data';
 import { characterLimit, formatDate } from 'utils/helpers';
 import useOnClickOutside from 'hooks/useOnClickOutside';
+import { motion } from 'framer-motion';
 import '../Users/users.scss'
 
 
@@ -19,7 +20,7 @@ const UsersTable = ({ tableData }: Props) => {
     const promptModalRef = useRef<HTMLDivElement>(null);
     const clickOutsidehandler = () => { setActiveIndex('') };
     useOnClickOutside(promptModalRef, clickOutsidehandler);
-   
+
 
 
     const renderTableHeadings = headings.map((val: any, i: number) => (
@@ -27,7 +28,11 @@ const UsersTable = ({ tableData }: Props) => {
     ))
 
     const renderUsers = tableData.map((user: any, i: number) => (
-        <tr key={i}>
+        <motion.tr key={i}
+            // initial={{ opacity: 0, translateY: -50, zIndex: 0 }}
+            // animate={{ opacity: 1, translateY: 0, zIndex: -99 }}
+            // transition={{ duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96], delay: i * 0.1 }}
+        >
             <td className='row__data'>{characterLimit(user.orgName, 24)} </td>
             <td>{user.userName}</td>
             <td>{characterLimit(user.email, 20)}</td>
@@ -36,14 +41,18 @@ const UsersTable = ({ tableData }: Props) => {
             <td>Active</td>
             <td onClick={() => setActiveIndex(i)} className='action__group'><Ellipsis />
                 {activeIndex === i &&
-                    <div ref={promptModalRef} className='action__prompt'>
+                    <motion.div ref={promptModalRef}
+                        initial={{ opacity: 0, translateX: -50, zIndex: 99 }}
+                        animate={{ opacity: 1, translateX: 0, zIndex: 99 }}
+                        transition={{ duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96], delay: i * 0.1 }}
+                        className='action__prompt'>
                         <a href={`users/${user.id}`}><div><EyeIcon /> View Details</div></a>
                         <div><BlackListIcon /> Blacklist User</div>
                         <div><ActivateUserIcon /> Activate User</div>
-                    </div>
+                    </motion.div>
                 }
             </td>
-        </tr>
+        </motion.tr>
     ))
 
     return (
