@@ -12,7 +12,6 @@ import ReactPaginate from 'react-paginate';
 
 
 
-
 const Index = () => {
   const dispatch = useAppDispatch()
   const { allUsers, isError, message } = useAppSelector((state: any) => state.users)

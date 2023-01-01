@@ -4,7 +4,7 @@
 .users__wrapper .cards__wrapper { display: flex; align-items: flex-start; justify-content: space-between; column-gap: 12px;}
 
 .table__container { margin-top: 40px; overflow: hidden; overflow-x: auto;}
-.table__wrapper { background: #FFFFFF; border: 1px solid rgba(33, 63, 125, 0.06); box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04); border-radius: 4px; width: 100%;} 
+.table__wrapper { background: #FFFFFF; position: relative; border: 1px solid rgba(33, 63, 125, 0.06); box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04); border-radius: 4px; width: 100%;} 
 .table__wrapper > thead { text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; color: $gray-hard; white-space:nowrap ;}
 .table__wrapper tbody tr { text-align: left; font-size: 12px; font-weight: 400; color: $gray-hard; white-space:nowrap ;}
 .table__wrapper  tbody td { padding: 16px 0 16px 16px; border-bottom: 1px solid $gray-soft; text-overflow: ellipsis;}
