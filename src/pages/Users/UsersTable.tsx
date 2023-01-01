@@ -3,7 +3,7 @@ import BlackListIcon from 'components/Icons/BlackListIcon';
 import Ellipsis from 'components/Icons/Ellipsis';
 import EyeIcon from 'components/Icons/EyeIcon';
 import SortIcon from 'components/Icons/SortIcon';
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { headings } from 'utils/data';
 import { characterLimit, formatDate } from 'utils/helpers';
 import useOnClickOutside from 'hooks/useOnClickOutside';
@@ -19,10 +19,7 @@ const UsersTable = ({ tableData }: Props) => {
     const promptModalRef = useRef<HTMLDivElement>(null);
     const clickOutsidehandler = () => { setActiveIndex('') };
     useOnClickOutside(promptModalRef, clickOutsidehandler);
-
-    const viewDetails = (user : any) => {
-        
-    }
+   
 
 
     const renderTableHeadings = headings.map((val: any, i: number) => (
@@ -40,7 +37,7 @@ const UsersTable = ({ tableData }: Props) => {
             <td onClick={() => setActiveIndex(i)} className='action__group'><Ellipsis />
                 {activeIndex === i &&
                     <div ref={promptModalRef} className='action__prompt'>
-                        <div onClick={() => viewDetails(user)}><EyeIcon /> View Details</div>
+                        <a href={`users/${user.id}`}><div><EyeIcon /> View Details</div></a>
                         <div><BlackListIcon /> Blacklist User</div>
                         <div><ActivateUserIcon /> Activate User</div>
                     </div>

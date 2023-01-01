@@ -1,18 +1,21 @@
-import { BrowserRouter as Router, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Login, Dashboard, Users, UserDetails } from "./pages";
 import Layout from "./components/Layout";
 
 function App() {
   return (
-    <main className="page__wrapper">
-      {/* <Login /> */}
-      <Layout>
-        <Users />
-        {/* <UserDetails /> */}
-      </Layout>
-    </main>
+    <Router>
+
+      <Routes
+      >
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Layout children={<Dashboard />} />} />
+        <Route path="/users" element={<Layout children={<Users />} />} />
+        <Route path="/users/:id" element={<Layout children={<UserDetails />} />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

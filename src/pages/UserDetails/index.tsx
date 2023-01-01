@@ -3,23 +3,30 @@ import Tabs from 'components/CustomTabs/Tabs'
 import '../UserDetails/userdetails.scss'
 import StarIcon from 'components/Icons/StarIcon'
 import Button from 'components/Shared/Button/Index'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom'
+import { getUserById } from 'features/users/usersSlice';
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+
 
 
 const Index = () => {
-    // const navigate = useNavigate();
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+    const { id } = useParams()
+    const { user, isError } = useAppSelector((state: any) => state.users)
 
-    // const renderX = cardInfo.map((val, i) => (
-    //     <div key={i}>
-    //         <p>{val.title}</p>
-    //     </div>
-    // ))
+
+    useEffect(() => {
+        dispatch(getUserById(id))
+      }, [])
+
 
     return (
         <section>
             <div className='user__details__wrapper'>
                 <button
-                    // onClick={() => navigate(-1)} 
+                    onClick={() => navigate(-1)}
                     className='back__btn'>
                     <ArrowBack />&nbsp; Back to Users
                 </button>
@@ -33,10 +40,10 @@ const Index = () => {
                 <div className='user__board'>
                     <div className="tandem__one">
                         <div className='user__profile'>
-                            <img src="./images/user.png" alt="alt_name" />
+                            <img src={user?.profile?.avatar} alt={`${user?.profile?.firstName}_avatar`} />
                             <div>
-                                <h1>{'Grace Effiom'}</h1>
-                                <p>{'LSQFf587g90'}</p>
+                                <h1>{user?.profile?.firstName} {user?.profile?.lastName}</h1>
+                                <p>{user?.accountNumber}</p>
                             </div>
                         </div>
                         <div className='user__tier'>
@@ -44,8 +51,8 @@ const Index = () => {
                             <StarIcon />
                         </div>
                         <div className='bank__details'>
-                            <h1>{'₦200,000.00'}</h1>
-                            <p>{'9912345678/Providus Bank'}</p>
+                            <h1>{user?.profile?.currency}{user?.accountBalance}</h1>
+                            <p>{user?.profile?.bvn}/Providus Bank</p>
                         </div>
                     </div>
                     <Tabs>
@@ -55,35 +62,35 @@ const Index = () => {
                                 <div className='block__base'>
                                     <div>
                                         <h2>{'full Name'}</h2>
-                                        <h3>{'Grace Effiom'}</h3>
+                                        <h3>{user?.profile?.firstName} {user?.profile?.lastName}</h3>
                                     </div>
                                     <div>
                                         <h2>{'phone number'}</h2>
-                                        <h3>{'Grace Effiom'}</h3>
+                                        <h3>{user?.profile?.phoneNumber}</h3>
                                     </div>
                                     <div>
                                         <h2>{'email address'}</h2>
-                                        <h3>{'Grace Effiom'}</h3>
+                                        <h3>{user?.email}</h3>
                                     </div>
                                     <div>
                                         <h2>{'bvn'}</h2>
-                                        <h3>{'Grace Effiom'}</h3>
+                                        <h3>{user?.profile?.bvn}</h3>
                                     </div>
                                     <div>
                                         <h2>{'gender'}</h2>
-                                        <h3>{'Grace Effiom'}</h3>
+                                        <h3>{user?.profile?.gender}</h3>
                                     </div>
                                     <div>
                                         <h2>{'marital status'}</h2>
-                                        <h3>{'Grace Effiom'}</h3>
+                                        <h3>{user?.profile?.status || 'Single'}</h3>
                                     </div>
                                     <div>
                                         <h2>{'children'}</h2>
-                                        <h3>{'Grace Effiom'}</h3>
+                                        <h3>{user?.profile?.children || 0}</h3>
                                     </div>
                                     <div>
                                         <h2>{'type of residence'}</h2>
-                                        <h3>{'Grace Effiom'}</h3>
+                                        <h3>{user?.profile?.address}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -92,31 +99,31 @@ const Index = () => {
                                 <div className='block__base'>
                                     <div>
                                         <h2>{'level of education'}</h2>
-                                        <h3>{'B.Sc'}</h3>
+                                        <h3>{user?.education?.level}</h3>
                                     </div>
                                     <div>
                                         <h2>{'employment status'}</h2>
-                                        <h3>{'B.Sc'}</h3>
+                                        <h3>{user?.education?.employmentStatus}</h3>
                                     </div>
                                     <div>
                                         <h2>{'sector of employment'}</h2>
-                                        <h3>{'B.Sc'}</h3>
+                                        <h3>{user?.education?.sector}</h3>
                                     </div>
                                     <div>
                                         <h2>{'Duration of employment'}</h2>
-                                        <h3>{'B.Sc'}</h3>
+                                        <h3>{user?.education?.duration}</h3>
                                     </div>
                                     <div>
                                         <h2>{'office email'}</h2>
-                                        <h3>{'B.Sc'}</h3>
+                                        <h3>{user?.education?.officeEmail}</h3>
                                     </div>
                                     <div>
                                         <h2>{'Monthly income'}</h2>
-                                        <h3>{'B.Sc'}</h3>
+                                        <h3>{user?.profile?.currency}{user?.education?.monthlyIncome[1]} - {user?.profile?.currency}{user?.education?.monthlyIncome[0]}</h3>
                                     </div>
                                     <div>
                                         <h2>{'loan repayment'}</h2>
-                                        <h3>{'B.Sc'}</h3>
+                                        <h3>{user?.profile?.currency}{user?.education?.loanRepayment}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -125,15 +132,15 @@ const Index = () => {
                                 <div className='block__base'>
                                     <div>
                                         <h2>{'twitter'}</h2>
-                                        <h3>{'@grace_effiom'}</h3>
+                                        <h3>{user?.socials?.twitter}</h3>
                                     </div>
                                     <div>
                                         <h2>{'facebook'}</h2>
-                                        <h3>{'@grace_effiom'}</h3>
+                                        <h3>{user?.socials?.facebook}</h3>
                                     </div>
                                     <div>
                                         <h2>{'instagram'}</h2>
-                                        <h3>{'@grace_effiom'}</h3>
+                                        <h3>{user?.socials?.instagram}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -142,19 +149,19 @@ const Index = () => {
                                 <div className='block__base'>
                                     <div>
                                         <h2>{'full bame'}</h2>
-                                        <h3>{'Debby Ogana'}</h3>
+                                        <h3>{user?.guarantor?.firstName}</h3>
                                     </div>
                                     <div>
                                         <h2>{'Phone Number'}</h2>
-                                        <h3>{'Debby Ogana'}</h3>
+                                        <h3>{user?.guarantor?.phoneNumber}</h3>
                                     </div>
                                     <div>
                                         <h2>{'email address'}</h2>
-                                        <h3>{'Debby Ogana'}</h3>
+                                        <h3>{user?.guarantor?.address}</h3>
                                     </div>
                                     <div>
                                         <h2>{'relationship'}</h2>
-                                        <h3>{'Debby Ogana'}</h3>
+                                        <h3>{user?.guarantor?.relationship || 'Sister'}</h3>
                                     </div>
                                 </div>
                             </div>

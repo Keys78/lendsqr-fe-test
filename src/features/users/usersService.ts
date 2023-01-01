@@ -12,9 +12,20 @@ const getAllUsers = async () => {
   const response = await axios.get(`${USERS_API_URL + 'users'}`, config)
   return response
 }
+const getUserById = async (id: any) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }
+  const response = await axios.get(`${USERS_API_URL + `users/${id}`}`, config)
+  console.log('user', response)
+  return response
+}
 
 const usersService = {
-  getAllUsers
+  getAllUsers,
+  getUserById
 }
 
 export default usersService

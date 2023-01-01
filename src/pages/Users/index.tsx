@@ -25,7 +25,7 @@ const Index = () => {
     {
       title: 'users',
       icon: <UsersIcon />,
-      data: '200'
+      data: allUsers?.length || 0
     },
     {
       title: 'active users',
