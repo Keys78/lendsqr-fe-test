@@ -19,7 +19,6 @@ const getUserById = async (id: any) => {
     },
   }
   const response = await axios.get(`${USERS_API_URL + `users/${id}`}`, config)
-  console.log('user', response)
   return response
 }
 

@@ -22,6 +22,7 @@ export const getAllUsers = createAsyncThunk(
   }
 )
 
+// Get user by id
 export const getUserById = createAsyncThunk(
   'users/:id',
   async (id: any, thunkAPI,) => {

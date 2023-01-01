@@ -55,14 +55,7 @@ const Index = () => {
         <div className='cards__wrapper'>
           {renderCards}
         </div>
-        <div>
-          {/* {allUsers.map((val: any, i: any) => (
-            <div key={i}>
-              <p>{val.userName}</p>
-            </div>
-          ))} */}
           <UsersTable tableData={allUsers}/>
-        </div>
       </div>
     </section>
   )

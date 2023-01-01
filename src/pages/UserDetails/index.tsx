@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { getUserById } from 'features/users/usersSlice';
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { characterLimit } from 'utils/helpers'
 
 
 
@@ -70,7 +71,7 @@ const Index = () => {
                                     </div>
                                     <div>
                                         <h2>{'email address'}</h2>
-                                        <h3>{user?.email}</h3>
+                                        <h3>{characterLimit(user?.email, 15)}</h3>
                                     </div>
                                     <div>
                                         <h2>{'bvn'}</h2>

@@ -4,8 +4,10 @@ import LogoIcon from 'components/Icons/LogoIcon'
 import Input from 'components/Shared/Input'
 import Button from 'components/Shared/Button/Index'
 import '../Login/login.scss'
+import { useNavigate } from 'react-router-dom'
 
 const Index = () => {
+  const navigate = useNavigate()
   const initialValues = {
     email: "",
     password: ""
@@ -71,7 +73,7 @@ const Index = () => {
             <div className='forgot__password'>
               <a href="#">Forgot Password</a>
             </div>
-            <Button children={'Log In'} type="submit" background={'bg__cyan'} text_transform={'text__transform'} padding={'btn__padding'} />
+            <Button onClick={() => navigate('/dashboard')} children={'Log In'} type="submit" background={'bg__cyan'} text_transform={'text__transform'} padding={'btn__padding'} />
           </form>
         </div>
       </div>
