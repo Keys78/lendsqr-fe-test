@@ -1,5 +1,5 @@
 import axios from 'axios'
-const USERS_API_URL = 'https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/' //production
+const USERS_API_URL = process.env.REACT_APP_USERS_API_URL
 
 
 
