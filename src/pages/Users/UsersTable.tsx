@@ -6,7 +6,7 @@ import SortIcon from 'components/Icons/SortIcon';
 import Filters from 'components/Filters/index'
 import { useState, useEffect, useRef } from 'react';
 import { headings } from 'utils/data';
-import { characterLimit, formatDate } from 'utils/helpers';
+import { characterLimit, formatDate, getYearsBetween } from 'utils/helpers';
 import useOnClickOutside from 'hooks/useOnClickOutside';
 import { motion } from 'framer-motion';
 import '../Users/users.scss'
@@ -40,6 +40,7 @@ const UsersTable = ({ tableData }: Props) => {
         </th>
     ))
 
+
     const renderUsers = currentUsers.map((user: any, i: number) => (
         <motion.tr key={i}
         >
@@ -48,7 +49,13 @@ const UsersTable = ({ tableData }: Props) => {
             <td>{characterLimit(user.email, 20)}</td>
             <td>{user.phoneNumber}</td>
             <td>{formatDate(user.createdAt)}</td>
-            <td>Active</td>
+            <td>{
+                (getYearsBetween(user.createdAt, user.lastActiveDate)) < 40 ? 'Active'
+                    : (getYearsBetween(user.createdAt, user.lastActiveDate)) > 40 && (getYearsBetween(user.createdAt, user.lastActiveDate)) <= 60 ? 'Pending'
+                        : (getYearsBetween(user.createdAt, user.lastActiveDate)) > 60 && (getYearsBetween(user.createdAt, user.lastActiveDate)) <= 90 ? 'Inactive'
+                            : (getYearsBetween(user.createdAt, user.lastActiveDate)) > 90 && 'Blacklisted'
+            }
+            </td>
             <td onClick={() => setActiveIndex(i)} className='action__group'><Ellipsis />
                 {activeIndex === i &&
                     <motion.div ref={promptModalRef}
