@@ -8,13 +8,12 @@ import '../Users/users.scss'
 import { useEffect } from 'react';
 import { getAllUsers } from 'features/users/usersSlice';
 import UsersTable from './UsersTable';
-import ReactPaginate from 'react-paginate';
 
 
 
 const Index = () => {
   const dispatch = useAppDispatch()
-  const { allUsers, isError, message } = useAppSelector((state: any) => state.users)
+  const { allUsers, isError } = useAppSelector((state: any) => state.users)
 
 
   useEffect(() => {
@@ -45,20 +44,20 @@ const Index = () => {
   ]
 
   const renderCards = cardInfo.map((card, i) => (
-    <UserCards 
-   
-    key={i} i={i} card={card} />
+    <UserCards  key={i} i={i} card={card} />
   ))
 
   return (
     <section>
-      <div className='users__wrapper'>
+      {!isError &&
+        <div className='users__wrapper'>
         <h1 className='heading'>Users</h1>
         <div className='cards__wrapper'>
           {renderCards}
         </div>
           <UsersTable tableData={allUsers}/>
       </div>
+      }
     </section>
   )
 }

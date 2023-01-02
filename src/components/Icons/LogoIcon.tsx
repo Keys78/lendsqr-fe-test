@@ -16,7 +16,6 @@ const LogoIcon = () => {
                 </linearGradient>
             </defs>
         </svg>
-
     )
 }
 
