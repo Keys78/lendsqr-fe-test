@@ -21,7 +21,7 @@ const Select = ({ label, options, input__class, label__class, placeholder, varia
             {/* <input className={input__class} type={type} required={required} placeholder={placeholder} value={value} onChange={onHandleInputChange} name={name} /> */}
             <select className={input__class}>
                 {options?.map((val: any, i: number) =>
-                    <option onClick={onClick} key={i} value={val}>{val}</option>
+                    <option onClick={() => onClick(val)} key={i} value={val.option}>{val.option}</option>
                 )}
             </select>
             <span onClick={onClick}>{variable_x}</span>

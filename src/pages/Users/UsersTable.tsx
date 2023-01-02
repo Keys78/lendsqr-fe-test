@@ -11,6 +11,7 @@ import useOnClickOutside from 'hooks/useOnClickOutside';
 import { motion } from 'framer-motion';
 import '../Users/users.scss'
 import Pagination from 'components/Pagination/Pagination';
+import CaretDownIcon from 'components/Icons/CaretDownIcon';
 
 
 interface Props {
@@ -22,8 +23,9 @@ const UsersTable = ({ tableData }: Props) => {
     const [isFilterModal, setIsFilterModal] = useState<boolean>(false)
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage, setUsersPerPage] = useState(10)
-    const indexOfLastUser = currentPage * 10;
-    const indexOfFirstUser = indexOfLastUser - 10;
+    const [showDrop, setShowDrop] = useState(false)
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
     const currentUsers = tableData && tableData.slice(indexOfFirstUser, indexOfLastUser)
     const promptModalRef = useRef<HTMLDivElement>(null);
     const clickOutsidehandler = () => { setActiveIndex('') };
@@ -72,6 +74,24 @@ const UsersTable = ({ tableData }: Props) => {
         </motion.tr>
     ))
 
+
+
+    const arr = Array.from({ length: 5 }, (_, i) => (i + 1) * 5)
+    const arrOfStr = arr.map(num => { return String(num); });
+    function autoSetUserPerPage(item: any, index: number) {
+        var newOptions = { option: item };
+        return newOptions;
+    }
+    var options = arrOfStr.map(autoSetUserPerPage);
+
+
+    const [selected, setSelcted] = useState<number>(10)
+    const updateVal = (val: any) => {
+        setSelcted(val.option)
+        setUsersPerPage(val.option)
+        setShowDrop(!showDrop)
+    }
+
     return (
         <>
             <section className='table__container'>
@@ -88,7 +108,24 @@ const UsersTable = ({ tableData }: Props) => {
                 </table>
             </section>
             <div className='table__footer'>
-                <div>&nbsp;</div>
+                <section className='page__number'>
+                    <p>Showing</p>
+                    <div className='dropbox'>
+                        <div  onClick={() => setShowDrop(!showDrop)} className='selected'>
+                            <div>{selected}</div>
+                            <p><CaretDownIcon /></p>
+                        </div>
+                        {
+                            showDrop &&
+                            <div className='options'>
+                                {options?.map((val: any, i: number) =>
+                                    <p key={i} onClick={() => updateVal(val)}>{val.option}</p>
+                                )}
+                            </div>
+                        }
+                    </div>
+                    <p>out of {tableData.length}</p>
+                </section>
                 <div>
                     <Pagination
                         currentPage={currentPage}

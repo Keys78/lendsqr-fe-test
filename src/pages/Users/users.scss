@@ -24,11 +24,17 @@
 .table__wrapper .action__prompt > div { display: flex; align-items: center; padding: 7px 43px 7px 25px; margin-bottom: 4px; cursor: pointer; transition: 0.3s; &:hover{ background: $gray-soft; transition: 0.3s;}}
 .table__wrapper .action__prompt > div > svg { margin-right: 10px;}
 .table__wrapper .action__prompt > a > div > svg { margin-right: 10px;}
-.table__footer {width: 100%; display: flex; align-items: center; justify-content: space-between; padding-top: 23px; }
+.table__footer {width: 100%; display: flex; align-items: center; justify-content: space-between; padding-top: 23px; padding-bottom: 30px; }
+.table__footer .page__number {width: 100%; display: flex; align-items: center; color: $gray-hard; font-size: 12px; }
+.table__footer .page__number .dropbox { max-width: 50px; width: 100%; position: relative; margin: 0 6px; }
+.table__footer .page__number .selected {cursor: pointer; display: flex; justify-content: space-around; align-items: center; background: $gray-soft; padding:4px; border-radius: 3px; }
+.table__footer .page__number .options { position: absolute; top: 26px; left: 0; box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04); border-radius: 3px; width: 100%;}
+.table__footer .page__number .options > p { &:hover{ background: $gray-soft; transition: 0.3s; cursor: pointer;}  padding:2px 4px 2px 6px;}
 
 @media screen and (max-width: 767px) {
     .users__wrapper .cards__wrapper { display: grid; grid-template-columns: repeat(2, 1fr);}
     .users__wrapper .heading { font-size: 18px; padding-bottom: 14px; }
     .table__container { margin-top: 20px; }
-
+    .table__footer { flex-direction: column-reverse; align-items: center; justify-content: center; }
+    .table__footer .page__number { justify-content: center; margin-top: 15px; }
 }

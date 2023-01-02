@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="A lending platform for the 21st century"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -24,36 +24,12 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Lendsqr</title>
     <base href="/">
-    <style>
-      .loader { height: 100vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;}
-      .loader img { height: 30px; margin-bottom: 10px;}
-      .loader .line { height: 3px; width: 200px; background: #e8e8e8; border-radius: 3px;}
-      .loader .inner { width: 100%; height: inherit; background: linear-gradient(to right, #0f2027, #203a43, #2c5364); animation: slide 2s ease-in-out infinite; border-radius: 3px;}
-      @media screen and (max-width: 1280px){.tabs-list {   margin-top: -1px !important; }}
-      @media screen and (max-width:472px){ .x-class {  margin-top: 20px !important; }}
-      @media screen and (max-width: 850px){.tabs-list {  padding:17px 15px 0 15px;}}
-      @keyframes slide {
-        0% { transform-origin: left; transform: scalex(0.3); }
-        25% { transform-origin: left; transform: scalex(1); }
-        26% { transform-origin: right; transform: scalex(1); }
-        50% {  transform-origin: right;  transform: scalex(0.3); }
-        75% { transform-origin: right; transform: scalex(1);}
-        76% { transform-origin: left; transform: scalex(1); }
-        100% { transform-origin: left; transform: scalex(0.3);}
-      }
-    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
-      <div className="loader">
-        <img src='images/logo.svg' alt="logo" />
-        <div className="line">
-          <div className="inner"></div>
-        </div>
-      </div>   
     </div>
     <!--
       This HTML file is a template.
