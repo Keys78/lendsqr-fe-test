@@ -4,7 +4,7 @@ import Ellipsis from 'components/Icons/Ellipsis';
 import EyeIcon from 'components/Icons/EyeIcon';
 import SortIcon from 'components/Icons/SortIcon';
 import Filters from 'components/Filters/index'
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { headings } from 'utils/data';
 import { characterLimit, formatDate, getYearsBetween } from 'utils/helpers';
 import useOnClickOutside from 'hooks/useOnClickOutside';
@@ -50,10 +50,10 @@ const UsersTable = ({ tableData }: Props) => {
             <td>{user.phoneNumber}</td>
             <td>{formatDate(user.createdAt)}</td>
             <td>{
-                (getYearsBetween(user.createdAt, user.lastActiveDate)) < 40 ? 'Active'
-                    : (getYearsBetween(user.createdAt, user.lastActiveDate)) > 40 && (getYearsBetween(user.createdAt, user.lastActiveDate)) <= 60 ? 'Pending'
-                        : (getYearsBetween(user.createdAt, user.lastActiveDate)) > 60 && (getYearsBetween(user.createdAt, user.lastActiveDate)) <= 90 ? 'Inactive'
-                            : (getYearsBetween(user.createdAt, user.lastActiveDate)) > 90 && 'Blacklisted'
+                (getYearsBetween(user.createdAt, user.lastActiveDate)) < 40 ? <span className="status__btn active__status">{'Active'}</span>
+                    : (getYearsBetween(user.createdAt, user.lastActiveDate)) > 40 && (getYearsBetween(user.createdAt, user.lastActiveDate)) <= 60 ? <span className="status__btn pending__status">{'Pending'}</span>
+                        : (getYearsBetween(user.createdAt, user.lastActiveDate)) > 60 && (getYearsBetween(user.createdAt, user.lastActiveDate)) <= 90 ? <span className="status__btn inactive__status">{'Inactive'}</span>
+                            : (getYearsBetween(user.createdAt, user.lastActiveDate)) > 90 && <span className="status__btn blacklsted__status">{'Blacklisted'}</span>
             }
             </td>
             <td onClick={() => setActiveIndex(i)} className='action__group'><Ellipsis />
