@@ -6,6 +6,7 @@ import '../Filters/filters.scss'
 import { useAppDispatch } from 'app/hooks'
 import { getAllUsers, filterByUsername, filterByEmail, filterByDateJoined, filterByPhoneNumber, filterByOrgName } from 'features/users/usersSlice'
 import CaretDownIcon from 'components/Icons/CaretDownIcon'
+import { characterLimit } from 'utils/helpers'
 
 interface IFilter {
     setIsFilterModal: any,
@@ -18,6 +19,7 @@ const Index = ({ setIsFilterModal, currentUsers }: IFilter) => {
     useOnClickOutside(filterModalRef, clickOutsidehandler);
     const [showDrop, setShowDrop] = useState<boolean>(false)
     const [selected, setSelcted] = useState<string>('Select')
+    const [statusSelect, setStatusSelect] = useState<string>('Select')
     const dispatch = useAppDispatch();
 
 
@@ -38,6 +40,8 @@ const Index = ({ setIsFilterModal, currentUsers }: IFilter) => {
         setShowDrop(!showDrop)
     }
 
+    const opt = [{status:'active'},{ status:'inactive'}, {status: 'pending'}]
+
 
     const resetAction = () => {
         dispatch(getAllUsers())
@@ -47,6 +51,7 @@ const Index = ({ setIsFilterModal, currentUsers }: IFilter) => {
 
     return (
         <span ref={filterModalRef} className='filters__wrapper'>
+            <label className='label__class'>{'Organisation'}</label>
             <div className='dropbox'>
                 <div onClick={() => setShowDrop(!showDrop)} className='selected'>
                     <div>{selected}</div>
@@ -56,16 +61,17 @@ const Index = ({ setIsFilterModal, currentUsers }: IFilter) => {
                     showDrop &&
                     <div className='options'>
                         {currentUsers?.map((val: any, i: number) =>
-                            <p key={i} onClick={() => updateVal(val)}>{val.orgName}</p>
+                            <p key={i} onClick={() => updateVal(val)}>{characterLimit(val.orgName, 20)}</p>
                         )}
                     </div>
                 }
             </div>
             <Input label={'Username'} input__class={'input__class'} label__class={'label__class'} myRef={usernameRef} onHandleInputChange={filterByUsernameAction} />
             <Input label={'Email'} input__class={'input__class'} label__class={'label__class'} myRef={emailRef} onHandleInputChange={filterByEmailAction} />
-            <Input type={'text'} label={'Date'} input__class={'input__class'} label__class={'label__class'} myRef={dateRef} onHandleInputChange={filterByDateJoinedAction} />
+            <Input type={'date'} label={'Date'} input__class={'input__class'} label__class={'label__class'} myRef={dateRef} onHandleInputChange={filterByDateJoinedAction} />
             <Input label={'Phone Number'} input__class={'input__class'} label__class={'label__class'} myRef={phoneRef} onHandleInputChange={filterByPhoneNumberAction} />
             <Input label={'Status'} input__class={'input__class'} label__class={'label__class'} disabled={true} />
+            <label className='label__class'>{'Status'}</label>
             <div className='filter__cta'>
                 <Button background='reset__styles' children={'Reset'} onClick={resetAction} />
                 {/* <Button background='filter__styles' children={'Filter'} onClick={filterAction} /> */}

@@ -15,13 +15,13 @@ export default function PageLink({ className, active, disabled, children, ...oth
   }
 
   return (
-    <a
+    <span
       className={customClassName}
       aria-current={active ? 'page' : undefined}
       {...otherProps}
     >
       {children}
-    </a>
+    </span>
   );
 }
  

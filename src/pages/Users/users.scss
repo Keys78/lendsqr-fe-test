@@ -9,8 +9,8 @@
 .users__wrapper .heading { font-weight: normal; font-size: 24px; color: $navy-blue; font-weight: 500; padding-bottom: 40px; }
 .users__wrapper .cards__wrapper { display: flex; align-items: flex-start; justify-content: space-between; column-gap: 12px;}
 
-.table__container { margin-top: 40px; overflow: hidden; overflow-x: auto;}
-.table__wrapper { background: #FFFFFF; position: relative; border: 1px solid rgba(33, 63, 125, 0.06); box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04); border-radius: 4px; width: 100%;} 
+.table__container { margin-top: 40px; overflow: hidden; overflow-x: auto; position: relative; z-index: 0;}
+.table__wrapper { background: #FFFFFF; position: relative; border: 1px solid rgba(33, 63, 125, 0.06); box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04); border-radius: 4px; width: 100%; } 
 .table__wrapper > thead { text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; color: $gray-hard; white-space:nowrap ;}
 .table__wrapper tbody tr { text-align: left; font-size: 12px; font-weight: 400; color: $gray-hard; white-space:nowrap ;}
 .table__wrapper  tbody td { padding: 16px 0 16px 16px; border-bottom: 1px solid $gray-soft; text-overflow: ellipsis;}
@@ -27,9 +27,11 @@
 .table__footer {width: 100%; display: flex; align-items: center; justify-content: space-between; padding-top: 23px; padding-bottom: 30px; }
 .table__footer .page__number {width: 100%; display: flex; align-items: center; color: $gray-hard; font-size: 12px; }
 .table__footer .page__number .dropbox { max-width: 50px; width: 100%; position: relative; margin: 0 6px; }
-.table__footer .page__number .selected {cursor: pointer; display: flex; justify-content: space-around; align-items: center; background: $gray-soft; padding:4px; border-radius: 3px; }
+.table__footer .page__number .selected {cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: $gray-soft; padding:4px; border-radius: 3px; }
 .table__footer .page__number .options { position: absolute; top: 26px; left: 0; box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04); border-radius: 3px; width: 100%;}
 .table__footer .page__number .options > p { &:hover{ background: $gray-soft; transition: 0.3s; cursor: pointer;}  padding:2px 4px 2px 6px;}
+
+.ttbb { border:2px solid red; }
 
 @media screen and (max-width: 767px) {
     .users__wrapper .cards__wrapper { display: grid; grid-template-columns: repeat(2, 1fr);}

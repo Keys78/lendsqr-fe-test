@@ -4,7 +4,7 @@ import Ellipsis from 'components/Icons/Ellipsis';
 import EyeIcon from 'components/Icons/EyeIcon';
 import SortIcon from 'components/Icons/SortIcon';
 import Filters from 'components/Filters/index'
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { headings } from 'utils/data';
 import { characterLimit, formatDate, getYearsBetween } from 'utils/helpers';
 import useOnClickOutside from 'hooks/useOnClickOutside';
@@ -32,8 +32,6 @@ const UsersTable = ({ tableData }: Props) => {
     const promptModalRef = useRef<HTMLDivElement>(null);
     const clickOutsidehandler = () => { setActiveIndex('') };
     useOnClickOutside(promptModalRef, clickOutsidehandler);
-
-
 
 
 
@@ -97,10 +95,9 @@ const UsersTable = ({ tableData }: Props) => {
 
     return (
         <>
+            {isFilterModal && <Filters currentUsers={currentUsers} setIsFilterModal={setIsFilterModal} />}
             <section className='table__container'>
-                {isFilterModal && <Filters currentUsers={currentUsers} setIsFilterModal={setIsFilterModal} />}
                 <table className="table__wrapper">
-
                     <thead>
                         <tr>
                             {renderTableHeadings}

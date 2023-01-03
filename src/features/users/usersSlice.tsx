@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { getYearsBetween } from 'utils/helpers'
 import usersService from './usersService'
 
 const initialState = {
@@ -60,14 +61,17 @@ export const usersSlice = createSlice({
 		},
     filterByDateJoined: (state, action) => {
 			state.filteredUsers = state.allUsers.filter((user: any) =>
-      console.log(user.createdAt, new Date(action.payload).toLocaleDateString())
-      // new Date(user.createdAt).toLocaleDateString().includes(new Date(action.payload).toLocaleDateString())
+      new Date(user.createdAt).toLocaleDateString() === (new Date(action.payload).toLocaleDateString())
 			);
 		},
     filterByPhoneNumber: (state, action) => {
 			state.filteredUsers = state.allUsers.filter((user: any) =>
       user.phoneNumber.includes(action.payload.replace(/[- )(]/g, ''))
 			);
+		},
+    filterByStatus: (state, action) => {
+			state.filteredUsers = state.allUsers.filter((user: any) =>
+      getYearsBetween(user.createdAt, user.lastActiveDate) < 40)
 		},
   },
 
@@ -106,5 +110,5 @@ export const usersSlice = createSlice({
 }
 )
 
-export const { resetUsers, filterByUsername,filterByEmail,filterByDateJoined,filterByPhoneNumber, filterByOrgName } = usersSlice.actions
+export const { resetUsers, filterByUsername,filterByEmail,filterByDateJoined,filterByPhoneNumber, filterByOrgName, filterByStatus } = usersSlice.actions
 export default usersSlice.reducer
