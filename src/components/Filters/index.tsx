@@ -71,7 +71,6 @@ const Index = ({ setIsFilterModal, currentUsers }: IFilter) => {
             <Input type={'date'} label={'Date'} input__class={'input__class'} label__class={'label__class'} myRef={dateRef} onHandleInputChange={filterByDateJoinedAction} />
             <Input label={'Phone Number'} input__class={'input__class'} label__class={'label__class'} myRef={phoneRef} onHandleInputChange={filterByPhoneNumberAction} />
             <Input label={'Status'} input__class={'input__class'} label__class={'label__class'} disabled={true} />
-            <label className='label__class'>{'Status'}</label>
             <div className='filter__cta'>
                 <Button background='reset__styles' children={'Reset'} onClick={resetAction} />
                 {/* <Button background='filter__styles' children={'Filter'} onClick={filterAction} /> */}
