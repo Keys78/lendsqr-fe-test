@@ -19,7 +19,6 @@ const Index = ({ setIsFilterModal, currentUsers }: IFilter) => {
     useOnClickOutside(filterModalRef, clickOutsidehandler);
     const [showDrop, setShowDrop] = useState<boolean>(false)
     const [selected, setSelcted] = useState<string>('Select')
-    const [statusSelect, setStatusSelect] = useState<string>('Select')
     const dispatch = useAppDispatch();
 
 
