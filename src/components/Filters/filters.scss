@@ -1,6 +1,6 @@
 @import '../../assets/styles/index.scss';
 
-.filters__wrapper { background: #FFFFFF; max-width: 270px; width: 100%; position: absolute; top: 55px; left: 16px;
+.filters__wrapper { background: #FFFFFF; max-width: 270px; width: 100%; position: absolute; z-index: 99; top: 55px; left: 16px;
     border: 1px solid rgba(84, 95, 125, 0.14);
     box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
     border-radius: 4px; padding: 30px 20px; }
@@ -11,3 +11,8 @@
 .filter__cta { display: flex; align-items: center; column-gap: 14px;}
 .filter__cta .filter__styles { background: $cyan-main; color: $white-main; padding: 11px 0; }
 .filter__cta .reset__styles { background: $white-main; color: $navy-blue; padding: 11px 0; border: 1px solid $navy-blue }
+
+.dropbox { max-width: 100%; width: 100%; position: relative; margin: 0 6px; }
+.selected {cursor: pointer; display: flex; justify-content: space-around; align-items: center; background: $gray-soft; padding:4px; border-radius: 3px; }
+.options { position: absolute; top: 26px; left: 0; box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04); border-radius: 3px; width: 100%; background: $white-main;}
+.options > p { &:hover{ background: $gray-soft; transition: 0.3s; cursor: pointer;}  padding:2px 4px 2px 6px;}

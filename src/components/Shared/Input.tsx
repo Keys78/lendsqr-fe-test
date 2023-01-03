@@ -12,14 +12,16 @@ interface Props {
     onHandleInputChange?: (event: React. ChangeEvent<HTMLInputElement>) => void
     onClick?: any
     value?: any
+    disabled?: boolean,
+    myRef?: any
 }
 
 
-const Input = ({ type, label, required, name, input__class, label__class, placeholder, variable_x, component__wrap, onHandleInputChange, onClick, value }: Props) => {
+const Input = ({ myRef, type, label, disabled, required, name, input__class, label__class, placeholder, variable_x, component__wrap, onHandleInputChange, onClick, value }: Props) => {
     return (
         <span className={`${component__wrap}`}>
             <label className={label__class}>{label}</label>
-            <input className={input__class} type={type} required={required} placeholder={placeholder} value={value} onChange={onHandleInputChange} name={name} />
+            <input ref={myRef} disabled={disabled} className={input__class} type={type} required={required} placeholder={placeholder} value={value} onChange={onHandleInputChange} name={name} />
             <span onClick={onClick}>{variable_x}</span>
         </span>
     )

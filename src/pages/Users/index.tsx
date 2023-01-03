@@ -13,7 +13,8 @@ import UsersTable from './UsersTable';
 
 const Index = () => {
   const dispatch = useAppDispatch()
-  const { allUsers, isError } = useAppSelector((state: any) => state.users)
+  const { filteredUsers, isError } = useAppSelector((state: any) => state.users)
+  
 
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const Index = () => {
     {
       title: 'users',
       icon: <UsersIcon />,
-      data: allUsers?.length || 0
+      data: filteredUsers?.length || 0
     },
     {
       title: 'active users',
@@ -55,7 +56,7 @@ const Index = () => {
         <div className='cards__wrapper'>
           {renderCards}
         </div>
-          <UsersTable tableData={allUsers}/>
+          { <UsersTable tableData={filteredUsers}/> }
       </div>
       }
     </section>
