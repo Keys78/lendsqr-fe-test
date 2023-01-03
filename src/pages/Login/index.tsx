@@ -5,6 +5,8 @@ import Input from 'components/Shared/Input'
 import Button from 'components/Shared/Button/Index'
 import '../Login/login.scss'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+
 
 const Index = () => {
   const navigate = useNavigate()
@@ -37,7 +39,12 @@ const Index = () => {
 
   const loginAction = (e: any) => {
     e.preventDefault();
-    console.log(values)
+
+    if(values.email === "" || values.password === "") {
+      return toast.error("fields can't be empty")
+    }
+
+    navigate('/dashboard')
   }
 
   return (
@@ -53,7 +60,6 @@ const Index = () => {
               name={'email'}
               value={values.email}
               type='email'
-              required={true}
               onHandleInputChange={(e) => onHandleInputChange(e)}
               placeholder={'Email'}
               input__class={'input__styles'}
@@ -62,7 +68,6 @@ const Index = () => {
               name={'password'}
               value={values.password}
               type={inputType}
-              required={true}
               onHandleInputChange={(e) => onHandleInputChange(e)}
               placeholder={'Password'}
               input__class={'input__styles'}
@@ -73,7 +78,7 @@ const Index = () => {
             <div className='forgot__password'>
               <a href="#">Forgot Password</a>
             </div>
-            <Button onClick={() => navigate('/dashboard')} children={'Log In'} type="submit" background={'bg__cyan'} text_transform={'text__transform'} padding={'btn__padding'} />
+            <Button children={'Log In'} type="submit" background={'bg__cyan'} text_transform={'text__transform'} padding={'btn__padding'} />
           </form>
         </div>
       </div>
