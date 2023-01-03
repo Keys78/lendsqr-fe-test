@@ -4,7 +4,7 @@ import Ellipsis from 'components/Icons/Ellipsis';
 import EyeIcon from 'components/Icons/EyeIcon';
 import SortIcon from 'components/Icons/SortIcon';
 import Filters from 'components/Filters/index'
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { headings } from 'utils/data';
 import { characterLimit, formatDate, getYearsBetween } from 'utils/helpers';
 import useOnClickOutside from 'hooks/useOnClickOutside';
@@ -15,21 +15,25 @@ import CaretDownIcon from 'components/Icons/CaretDownIcon';
 
 
 interface Props {
-    tableData: []
+    tableData: [],
 }
+
 
 const UsersTable = ({ tableData }: Props) => {
     const [activeIndex, setActiveIndex] = useState<any>('')
     const [isFilterModal, setIsFilterModal] = useState<boolean>(false)
-    const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage, setUsersPerPage] = useState(10)
-    const [showDrop, setShowDrop] = useState(false)
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [usersPerPage, setUsersPerPage] = useState<number>(10)
+    const [selected, setSelcted] = useState<number>(10)
+    const [showDrop, setShowDrop] = useState<boolean>(false)
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
     const currentUsers = tableData && tableData.slice(indexOfFirstUser, indexOfLastUser)
     const promptModalRef = useRef<HTMLDivElement>(null);
     const clickOutsidehandler = () => { setActiveIndex('') };
     useOnClickOutside(promptModalRef, clickOutsidehandler);
+
+
 
 
 
@@ -43,7 +47,7 @@ const UsersTable = ({ tableData }: Props) => {
     ))
 
 
-    const renderUsers = currentUsers.map((user: any, i: number) => (
+    const renderUsers = currentUsers?.map((user: any, i: number) => (
         <motion.tr key={i}
         >
             <td className='row__data'>{characterLimit(user.orgName, 24)} </td>
@@ -85,7 +89,6 @@ const UsersTable = ({ tableData }: Props) => {
     var options = arrOfStr.map(autoSetUserPerPage);
 
 
-    const [selected, setSelcted] = useState<number>(10)
     const updateVal = (val: any) => {
         setSelcted(val.option)
         setUsersPerPage(val.option)
@@ -95,8 +98,9 @@ const UsersTable = ({ tableData }: Props) => {
     return (
         <>
             <section className='table__container'>
+                {isFilterModal && <Filters currentUsers={currentUsers} setIsFilterModal={setIsFilterModal} />}
                 <table className="table__wrapper">
-                    {isFilterModal && <Filters setIsFilterModal={setIsFilterModal} />}
+
                     <thead>
                         <tr>
                             {renderTableHeadings}
@@ -111,8 +115,8 @@ const UsersTable = ({ tableData }: Props) => {
                 <section className='page__number'>
                     <p>Showing</p>
                     <div className='dropbox'>
-                        <div  onClick={() => setShowDrop(!showDrop)} className='selected'>
-                            <div>{selected}</div>
+                        <div onClick={() => setShowDrop(!showDrop)} className='selected'>
+                            <div>{tableData.length > selected ? selected : tableData.length}</div>
                             <p><CaretDownIcon /></p>
                         </div>
                         {

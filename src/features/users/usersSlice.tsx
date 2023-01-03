@@ -3,6 +3,7 @@ import usersService from './usersService'
 
 const initialState = {
   allUsers: [],
+  filteredUsers: [],
   user:{},
   isError: false,
   isSuccess: false,
@@ -42,6 +43,32 @@ export const usersSlice = createSlice({
     getAllUsers: (state, action) => {
       state.allUsers = action.payload.data
     },
+    filterByOrgName: (state, action) => {
+			state.filteredUsers = state.allUsers.filter((user: any) =>
+				user.orgName.toLowerCase().includes(action.payload.toLocaleLowerCase()) 
+			);
+		},
+    filterByUsername: (state, action) => {
+			state.filteredUsers = state.allUsers.filter((user: any) =>
+				user.userName.toLowerCase().includes(action.payload.toLocaleLowerCase()) 
+			);
+		},
+    filterByEmail: (state, action) => {
+			state.filteredUsers = state.allUsers.filter((user: any) =>
+				user.email.toLowerCase().includes(action.payload.toLocaleLowerCase()) 
+			);
+		},
+    filterByDateJoined: (state, action) => {
+			state.filteredUsers = state.allUsers.filter((user: any) =>
+      console.log(user.createdAt, new Date(action.payload).toLocaleDateString())
+      // new Date(user.createdAt).toLocaleDateString().includes(new Date(action.payload).toLocaleDateString())
+			);
+		},
+    filterByPhoneNumber: (state, action) => {
+			state.filteredUsers = state.allUsers.filter((user: any) =>
+      user.phoneNumber.includes(action.payload.replace(/[- )(]/g, ''))
+			);
+		},
   },
 
 
@@ -54,6 +81,7 @@ export const usersSlice = createSlice({
         state.isLoading = false
         state.isSuccess = true
         state.allUsers = action.payload.data
+        state.filteredUsers = action.payload.data
       })
       .addCase(getAllUsers.rejected, (state, action) => {
         state.isLoading = false
@@ -78,5 +106,5 @@ export const usersSlice = createSlice({
 }
 )
 
-export const { resetUsers } = usersSlice.actions
+export const { resetUsers, filterByUsername,filterByEmail,filterByDateJoined,filterByPhoneNumber, filterByOrgName } = usersSlice.actions
 export default usersSlice.reducer

@@ -18,7 +18,6 @@ const Select = ({ label, options, input__class, label__class, placeholder, varia
     return (
         <span className={`${component__wrap}`}>
             <label className={label__class}>{label}</label>
-            {/* <input className={input__class} type={type} required={required} placeholder={placeholder} value={value} onChange={onHandleInputChange} name={name} /> */}
             <select className={input__class}>
                 {options?.map((val: any, i: number) =>
                     <option onClick={() => onClick(val)} key={i} value={val.option}>{val.option}</option>
