@@ -9,7 +9,7 @@ The task is to build a loan app simulation web application with Reactjs, TypeScr
 - Sort and filter users based on the provided params.
 
 # Lighthouse test screenshots
-![Alt text](./images/lighthouse_test.png?raw=true "Tests Screenhots")
+![Alt text](./public/images/lighthouse_test.png "Tests Screenhots")
 
 
 ## Tools
