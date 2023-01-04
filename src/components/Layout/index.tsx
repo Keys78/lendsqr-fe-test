@@ -1,7 +1,8 @@
+import { lazy } from 'react';
 import '../Layout/layout.scss'
-import Sidebar from '../Sidebar/index'
-import Navbar from '../Navbar/index'
 import { useState, useEffect } from 'react'
+const Navbar = lazy(() => import('../Navbar/index'));
+const Sidebar = lazy(() => import('../Sidebar/index'));
 
 interface Props {
   children: any

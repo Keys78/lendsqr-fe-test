@@ -3,7 +3,6 @@ import { Login, Dashboard, Users, UserDetails } from "./pages";
 import { ToastContainer } from 'react-toastify';
 import Layout from "./components/Layout";
 import { Suspense } from 'react'
-import Loader from 'components/Loader';
 import LoadingScreen from 'components/LoadingSreen/LoadingScreen';
 
 

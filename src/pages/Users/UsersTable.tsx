@@ -54,7 +54,7 @@ const UsersTable = ({ tableData }: Props) => {
             <td>{user.phoneNumber}</td>
             <td>{formatDate(user.createdAt)}</td>
             <td>{
-                (getYearsBetween(user.createdAt, user.lastActiveDate)) < 40 ? <span className="status__btn active__status">{'Active'}</span>
+                (getYearsBetween(user.createdAt, user.lastActiveDate)) <= 40 ? <span className="status__btn active__status">{'Active'}</span>
                     : (getYearsBetween(user.createdAt, user.lastActiveDate)) > 40 && (getYearsBetween(user.createdAt, user.lastActiveDate)) <= 60 ? <span className="status__btn pending__status">{'Pending'}</span>
                         : (getYearsBetween(user.createdAt, user.lastActiveDate)) > 60 && (getYearsBetween(user.createdAt, user.lastActiveDate)) <= 90 ? <span className="status__btn inactive__status">{'Inactive'}</span>
                             : (getYearsBetween(user.createdAt, user.lastActiveDate)) > 90 && <span className="status__btn blacklsted__status">{'Blacklisted'}</span>

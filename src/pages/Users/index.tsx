@@ -17,7 +17,7 @@ const UsersTable = lazy(() => import('./UsersTable'));
 
 const Index = () => {
   const dispatch = useAppDispatch()
-  const { filteredUsers, isError, isLoading } = useAppSelector((state: any) => state.users)
+  const { filteredUsers, isError, isLoading, message } = useAppSelector((state: any) => state.users)
 
   // gen-table-con-users info
   const activeUsers = filteredUsers.filter((val: any) => getYearsBetween(val.createdAt, val.lastActiveDate) < 40)
@@ -62,13 +62,14 @@ const Index = () => {
   return (
     <section>
       {isLoading && <Loader />}
+      {isError && <span>{message}</span>}
       {!isError &&
         <div className='users__wrapper'>
         <h1 className='heading'>Users</h1>
         <div className='cards__wrapper'>
           {renderCards}
         </div>
-          { <UsersTable tableData={filteredUsers}/> }
+          {!isLoading && <UsersTable tableData={filteredUsers}/> }
       </div>
       }
     </section>

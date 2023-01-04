@@ -4,7 +4,8 @@ import useOnClickOutside from 'hooks/useOnClickOutside'
 import { useRef, useState } from 'react'
 import '../Filters/filters.scss'
 import { useAppDispatch } from 'app/hooks'
-import { getAllUsers, filterByUsername, filterByEmail, filterByDateJoined, filterByPhoneNumber, filterByOrgName } from 'features/users/usersSlice'
+import { getAllUsers, filterByUsername, filterByEmail, filterByDateJoined, filterByPhoneNumber, filterByOrgName, 
+         filterByActiveStatus, filterByPendingStatus, filterByInactveStatus, filterByBlacklistStatus } from 'features/users/usersSlice'
 import CaretDownIcon from 'components/Icons/CaretDownIcon'
 import { characterLimit } from 'utils/helpers'
 
@@ -18,7 +19,9 @@ const Index = ({ setIsFilterModal, currentUsers }: IFilter) => {
     const clickOutsidehandler = () => { setIsFilterModal(false) };
     useOnClickOutside(filterModalRef, clickOutsidehandler);
     const [showDrop, setShowDrop] = useState<boolean>(false)
+    const [showStatusDrop, setShoStatusDrop] = useState<boolean>(false)
     const [selected, setSelcted] = useState<string>('Select')
+    const [selectedd, setSelctedd] = useState<string>('Select')
     const dispatch = useAppDispatch();
 
 
@@ -38,9 +41,6 @@ const Index = ({ setIsFilterModal, currentUsers }: IFilter) => {
         dispatch(filterByOrgName(val.orgName))
         setShowDrop(!showDrop)
     }
-
-    const opt = [{status:'active'},{ status:'inactive'}, {status: 'pending'}]
-
 
     const resetAction = () => {
         dispatch(getAllUsers())
@@ -69,10 +69,23 @@ const Index = ({ setIsFilterModal, currentUsers }: IFilter) => {
             <Input label={'Email'} input__class={'input__class'} label__class={'label__class'} myRef={emailRef} onHandleInputChange={filterByEmailAction} />
             <Input type={'date'} label={'Date'} input__class={'input__class'} label__class={'label__class'} myRef={dateRef} onHandleInputChange={filterByDateJoinedAction} />
             <Input label={'Phone Number'} input__class={'input__class'} label__class={'label__class'} myRef={phoneRef} onHandleInputChange={filterByPhoneNumberAction} />
-            <Input label={'Status'} input__class={'input__class'} label__class={'label__class'} disabled={true} />
+            <div className='dropbox'>
+                <div onClick={() => setShoStatusDrop(!showStatusDrop)} className='selected'>
+                    <div>{selectedd}</div>
+                    <p><CaretDownIcon /></p>
+                </div>
+                {
+                    showStatusDrop &&
+                    <div className='options'>
+                        <p onClick={() => { dispatch(filterByActiveStatus(null)); setShoStatusDrop(!showStatusDrop); setSelctedd('active') }}>{'active'}</p>
+                        <p onClick={() => { dispatch(filterByPendingStatus(null)); setShoStatusDrop(!showStatusDrop); setSelctedd('pending') }}>{'pending'}</p>
+                        <p onClick={() => { dispatch(filterByInactveStatus(null)); setShoStatusDrop(!showStatusDrop); setSelctedd('inactive') }}>{'inactive'}</p>
+                        <p onClick={() => { dispatch(filterByBlacklistStatus(null)); setShoStatusDrop(!showStatusDrop); setSelctedd('blacklisted') }}>{'blacklisted'}</p>
+                    </div>
+                }
+            </div>
             <div className='filter__cta'>
                 <Button background='reset__styles' children={'Reset'} onClick={resetAction} />
-                {/* <Button background='filter__styles' children={'Filter'} onClick={filterAction} /> */}
             </div>
         </span>
     )

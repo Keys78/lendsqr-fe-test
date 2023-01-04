@@ -1,46 +1,65 @@
-# Getting Started with Create React App
+## __Jobs finder__
+A mini job finder app.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Task
+The task is to build a mini job finder web application with Vuejs, using provided samples API endpoint. The app should be able to
+1. Search for jobs
+2. View all available jobs 
+3. View a single job.
 
-## Available Scripts
+# BrowserStack test screenshots
+![Alt text](./src/assets/images/sc1.png?raw=true "Tests Screenhots")
+![Alt text](./src/assets/images/sc2.png?raw=true "Tests Screenhots")
+![Alt text](./src/assets/images/sc2.png?raw=true "Tests Screenhots")
+![Alt text](./src/assets/images/sc3.png?raw=true "Tests Screenhots")
+![Alt text](./src/assets/images/sc4.png?raw=true "Tests Screenhots")
+![Alt text](./src/assets/images/sc5.png?raw=true "Tests Screenhots")
+![Alt text](./src/assets/images/sc6.png?raw=true "Tests Screenhots")
 
-In the project directory, you can run:
 
-### `yarn start`
+## The Tools and Hows
+- The vue app was created using vue 2,
+- `Vuex` store was used for state management and `option-API` because of its flexibility.
+- The HTTP library used is `axios`
+- BASE_URL https://viewjobapi.herokuapp.com/job stored in the `.env` file and assessed in the `services` folder
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Challenges
+One of the major challenges I experienced executing this task was the inability of the `API` to update the `page number` on `get request` even when the page was passed alongside the `query`.
+This therefore rendered the paginaton which relies on the `API` returned `page number` ineffective.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
+## How to setup ?
+1. Clone Project and `cd` to project directory >> `folderName`
+2. Run `yarn install` in root folder to install dependencies
+3. Type `yarn serve` in the root folder to initialise project on local dev. env.
+4. Navigate to your browser http: [your port in dev.env] e.g. http://localhost:8080
+5. To run tests cases, type  `yarn build` in your terminal/ssh client
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- link to live `[https://emmanuel-anamen-assessment.vercel.app/](https://emmanuel-anamen-assessment.vercel.app/)
 
-### `yarn build`
+## API Reference
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Get all jobs
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+ GET: https://viewjobapi.herokuapp.com/job
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Get single job
 
-### `yarn eject`
+```
+GET: https://viewjobapi.herokuapp.com/job/id
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Using Queries
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+GET: https://viewjobapi.herokuapp.com/job?keyword=javascript&resultPerPage=15&page=1
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `keyword` | `string` | **Required**. null |
+| `resultPerPage` | `number` | **Required**. null |
+| `page` | `number` | **Required**. null |
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

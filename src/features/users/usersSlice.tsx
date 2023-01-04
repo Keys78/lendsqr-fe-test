@@ -5,11 +5,12 @@ import usersService from './usersService'
 const initialState = {
   allUsers: [],
   filteredUsers: [],
-  user:{},
+  user: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
-  message: ''
+  message: '' as any,
+
 }
 
 // Get all users
@@ -18,8 +19,14 @@ export const getAllUsers = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       return await usersService.getAllUsers()
-    } catch (error) {
-      return thunkAPI.rejectWithValue('error')
+    } catch (error: any) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
     }
   }
 )
@@ -30,8 +37,14 @@ export const getUserById = createAsyncThunk(
   async (id: any, thunkAPI,) => {
     try {
       return await usersService.getUserById(id)
-    } catch (error) {
-      return thunkAPI.rejectWithValue('error')
+    } catch (error: any) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
     }
   }
 )
@@ -45,34 +58,46 @@ export const usersSlice = createSlice({
       state.allUsers = action.payload.data
     },
     filterByOrgName: (state, action) => {
-			state.filteredUsers = state.allUsers.filter((user: any) =>
-				user.orgName.toLowerCase().includes(action.payload.toLocaleLowerCase()) 
-			);
-		},
+      state.filteredUsers = state.allUsers.filter((user: any) =>
+        user.orgName.toLowerCase().includes(action.payload.toLocaleLowerCase())
+      );
+    },
     filterByUsername: (state, action) => {
-			state.filteredUsers = state.allUsers.filter((user: any) =>
-				user.userName.toLowerCase().includes(action.payload.toLocaleLowerCase()) 
-			);
-		},
+      state.filteredUsers = state.allUsers.filter((user: any) =>
+        user.userName.toLowerCase().includes(action.payload.toLocaleLowerCase())
+      );
+    },
     filterByEmail: (state, action) => {
-			state.filteredUsers = state.allUsers.filter((user: any) =>
-				user.email.toLowerCase().includes(action.payload.toLocaleLowerCase()) 
-			);
-		},
+      state.filteredUsers = state.allUsers.filter((user: any) =>
+        user.email.toLowerCase().includes(action.payload.toLocaleLowerCase())
+      );
+    },
     filterByDateJoined: (state, action) => {
-			state.filteredUsers = state.allUsers.filter((user: any) =>
-      new Date(user.createdAt).toLocaleDateString() === (new Date(action.payload).toLocaleDateString())
-			);
-		},
+      state.filteredUsers = state.allUsers.filter((user: any) =>
+        new Date(user.createdAt).toLocaleDateString() === (new Date(action.payload).toLocaleDateString())
+      );
+    },
     filterByPhoneNumber: (state, action) => {
-			state.filteredUsers = state.allUsers.filter((user: any) =>
-      user.phoneNumber.includes(action.payload.replace(/[- )(]/g, ''))
-			);
-		},
-    filterByStatus: (state, action) => {
-			state.filteredUsers = state.allUsers.filter((user: any) =>
-      getYearsBetween(user.createdAt, user.lastActiveDate) < 40)
-		},
+      state.filteredUsers = state.allUsers.filter((user: any) =>
+        user.phoneNumber.includes(action.payload.replace(/[- )(]/g, ''))
+      );
+    },
+    filterByActiveStatus: (state, action) => {
+      state.filteredUsers = state.allUsers.filter((user: any) =>
+        getYearsBetween(user.createdAt, user.lastActiveDate) <= (40))
+    },
+    filterByPendingStatus: (state, action) => {
+      state.filteredUsers = state.allUsers.filter((user: any) =>
+        getYearsBetween(user.createdAt, user.lastActiveDate) > (40) && getYearsBetween(user.createdAt, user.lastActiveDate) <= (60))
+    },
+    filterByInactveStatus: (state, action) => {
+      state.filteredUsers = state.allUsers.filter((user: any) =>
+        getYearsBetween(user.createdAt, user.lastActiveDate) > (60) && getYearsBetween(user.createdAt, user.lastActiveDate) <= (90))
+    },
+    filterByBlacklistStatus: (state, action) => {
+      state.filteredUsers = state.allUsers.filter((user: any) =>
+        getYearsBetween(user.createdAt, user.lastActiveDate) > (90))
+    },
   },
 
 
@@ -90,7 +115,7 @@ export const usersSlice = createSlice({
       .addCase(getAllUsers.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
-        state.message = 'error occured'
+        state.message = action.payload
       })
       .addCase(getUserById.pending, (state: any) => {
         state.isLoading = true
@@ -103,12 +128,23 @@ export const usersSlice = createSlice({
       .addCase(getUserById.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
-        state.message = 'error occured'
+        state.message = action.payload
       })
 
   },
 }
 )
 
-export const { resetUsers, filterByUsername,filterByEmail,filterByDateJoined,filterByPhoneNumber, filterByOrgName, filterByStatus } = usersSlice.actions
+export const {
+  resetUsers,
+  filterByUsername,
+  filterByEmail,
+  filterByDateJoined,
+  filterByPhoneNumber,
+  filterByOrgName,
+  filterByActiveStatus,
+  filterByPendingStatus,
+  filterByInactveStatus,
+  filterByBlacklistStatus
+} = usersSlice.actions
 export default usersSlice.reducer
