@@ -19,8 +19,8 @@ The task is to build a loan app simulation web application with Reactjs, TypeScr
 - BASE_URL `REACT_APP_USERS_API_URL` for API_endpoints was stored in the `.env` file and assessed in the `features` folder
 
 ## Challenges and Hows
-- User account status
-  The users account status wasn't amongst that data return by the users endpoint - 
+#### User account status
+-The users account status wasn't amongst that data return by the users endpoint - 
 ```javascript
 I worked around this by getting the difference in years between the user `createdAt` and `lastActiveDate` and
 setting defined age range for params like so --
@@ -32,14 +32,13 @@ setting defined age range for params like so --
 | Inactive | > 60 <= 90 |
 | Blacklist | > 90 |
 
-- Filter Call-to-Action Buttons
-  The requirement to click on filter button before action can take place tad-bit from the user experience - 
+#### Filter Call-to-Action Buttons
+- The requirement to click on filter button before action can take place tad-bit from the user experience - 
 ```javascript
 I upgraded this by removing the filter button, thus enabling the page to filter on-key-press for words in tandem with the defined paramas
 ```
-
-- Activate and Deactivate User
-  no endpoints was provided for user activation/deactivation,
+####Activate and Deactivate User
+- no endpoints was provided for user activation/deactivation,
 
 ## Environment Variables
 To run this project, you will need to add the following environment variables to your .env file
