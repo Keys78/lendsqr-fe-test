@@ -1,65 +1,76 @@
-## __Jobs finder__
-A mini job finder app.
+## Lendsqr_
+Loan App Simulation.
 
-## Task
-The task is to build a mini job finder web application with Vuejs, using provided samples API endpoint. The app should be able to
-1. Search for jobs
-2. View all available jobs 
-3. View a single job.
+## Task Synopsis
+The task is to build a loan app simulation web application with Reactjs, TypeScript & Scss, using provided samples API endpoint. The app should be able to
+- Match the look and feel of the provided with a confidence level greater than 95% error margin
+- Login visitor/admin
+- See all users, stats as well as personal details.
+- Sort and filter users based on the provided params.
 
-# BrowserStack test screenshots
-![Alt text](./src/assets/images/sc1.png?raw=true "Tests Screenhots")
-![Alt text](./src/assets/images/sc2.png?raw=true "Tests Screenhots")
-![Alt text](./src/assets/images/sc2.png?raw=true "Tests Screenhots")
-![Alt text](./src/assets/images/sc3.png?raw=true "Tests Screenhots")
-![Alt text](./src/assets/images/sc4.png?raw=true "Tests Screenhots")
-![Alt text](./src/assets/images/sc5.png?raw=true "Tests Screenhots")
-![Alt text](./src/assets/images/sc6.png?raw=true "Tests Screenhots")
+# Lighthouse test screenshots
+![Alt text](./images/lighthouse_test.png?raw=true "Tests Screenhots")
 
 
-## The Tools and Hows
-- The vue app was created using vue 2,
-- `Vuex` store was used for state management and `option-API` because of its flexibility.
+## Tools
+- The application was created using Reactjs v16+,
+- `Redux Toolkit` was used for state management because of its flexibility and larged scaled resources.
 - The HTTP library used is `axios`
-- BASE_URL https://viewjobapi.herokuapp.com/job stored in the `.env` file and assessed in the `services` folder
+- BASE_URL `REACT_APP_USERS_API_URL` for API_endpoints was stored in the `.env` file and assessed in the `features` folder
 
-## Challenges
-One of the major challenges I experienced executing this task was the inability of the `API` to update the `page number` on `get request` even when the page was passed alongside the `query`.
-This therefore rendered the paginaton which relies on the `API` returned `page number` ineffective.
+## Challenges and Hows
+- User account status
+  The users account status wasn't amongst that data return by the users endpoint - 
+```javascript
+I worked around this by getting the difference in years between the user `createdAt` and `lastActiveDate` and
+setting defined age range for params like so --
+```
+| Status             | Year Range                                                              |
+| ----------------- | ------------------------------------------------------------------ |
+| Active | <= 40  |
+| Pending | > 40 <= 60 |
+| Inactive | > 60 <= 90 |
+| Blacklist | > 90 |
+
+- Filter Call-to-Action Buttons
+  The requirement to click on filter button before action can take place tad-bit from the user experience - 
+```javascript
+I upgraded this by removing the filter button, thus enabling the page to filter on-key-press for words in tandem with the defined paramas
+```
+
+- Activate and Deactivate User
+  no endpoints was provided for user activation/deactivation,
+
+## Environment Variables
+To run this project, you will need to add the following environment variables to your .env file
+
+`REACT_APP_USERS_API_URL`
 
 
 ## How to setup ?
-1. Clone Project and `cd` to project directory >> `folderName`
-2. Run `yarn install` in root folder to install dependencies
-3. Type `yarn serve` in the root folder to initialise project on local dev. env.
-4. Navigate to your browser http: [your port in dev.env] e.g. http://localhost:8080
-5. To run tests cases, type  `yarn build` in your terminal/ssh client
-
-- link to live `[https://emmanuel-anamen-assessment.vercel.app/](https://emmanuel-anamen-assessment.vercel.app/)
+- Clone Project and `cd` to project directory >> `folderName`
+- Run `yarn` in root folder to install dependencies
+- Follow the step above to setup .env file
+- Navigate to your browser http: [your port in dev.env] e.g. http://localhost:3000
+- To run tests cases, type  `yarn build` in your terminal/ssh client
+- link to live `[https://emmanuelo-lendsqr-fe-test.vercel.app/](https://emmanuelo-lendsqr-fe-test.vercel.app/)
 
 ## API Reference
 
-#### Get all jobs
+#### Get all users
 
 ```
- GET: https://viewjobapi.herokuapp.com/job
+ GET: REACT_APP_USERS_API_URL/users
 ```
 
-#### Get single job
+#### Get single user
 
 ```
-GET: https://viewjobapi.herokuapp.com/job/id
+GET: REACT_APP_USERS_API_URL/id
 ```
 
-#### Using Queries
-
-```
-GET: https://viewjobapi.herokuapp.com/job?keyword=javascript&resultPerPage=15&page=1
-```
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `keyword` | `string` | **Required**. null |
-| `resultPerPage` | `number` | **Required**. null |
-| `page` | `number` | **Required**. null |
-
+| `users` | `object` | **Required**. null |
+| `id` | `string` | **Required**. null |
