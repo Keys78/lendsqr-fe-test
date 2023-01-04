@@ -4,8 +4,11 @@ import useOnClickOutside from 'hooks/useOnClickOutside'
 import { useRef, useState } from 'react'
 import '../Filters/filters.scss'
 import { useAppDispatch } from 'app/hooks'
-import { getAllUsers, filterByUsername, filterByEmail, filterByDateJoined, filterByPhoneNumber, filterByOrgName, 
-         filterByActiveStatus, filterByPendingStatus, filterByInactveStatus, filterByBlacklistStatus } from 'features/users/usersSlice'
+import { motion } from 'framer-motion'
+import {
+    getAllUsers, filterByUsername, filterByEmail, filterByDateJoined, filterByPhoneNumber, filterByOrgName,
+    filterByActiveStatus, filterByPendingStatus, filterByInactveStatus, filterByBlacklistStatus
+} from 'features/users/usersSlice'
 import CaretDownIcon from 'components/Icons/CaretDownIcon'
 import { characterLimit } from 'utils/helpers'
 
@@ -49,7 +52,11 @@ const Index = ({ setIsFilterModal, currentUsers }: IFilter) => {
     }
 
     return (
-        <span ref={filterModalRef} className='filters__wrapper'>
+        <motion.span
+            initial={{ opacity: 0, translateX: -50, zIndex: 99 }}
+            animate={{ opacity: 1, translateX: 0, zIndex: 99 }}
+            transition={{ duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96], delay: 0.1 }}
+            ref={filterModalRef} className='filters__wrapper'>
             <label className='label__class'>{'Organisation'}</label>
             <div className='dropbox'>
                 <div onClick={() => setShowDrop(!showDrop)} className='selected'>
@@ -87,7 +94,7 @@ const Index = ({ setIsFilterModal, currentUsers }: IFilter) => {
             <div className='filter__cta'>
                 <Button background='reset__styles' children={'Reset'} onClick={resetAction} />
             </div>
-        </span>
+        </motion.span>
     )
 }
 

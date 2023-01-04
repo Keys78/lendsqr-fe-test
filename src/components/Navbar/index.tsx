@@ -21,7 +21,7 @@ const index = ({isNavOpen, setIsNavOpen }: Props) => {
             <Searchbar />
           </div>
           <div className='interactive__board__content'>
-            <div className='xl__hide'><a href="#">Docs</a></div>
+            <div className='xl__hide'><a href="https://github.com/Keys78/lendsqr-fe-test" target={'_blank'}>Docs</a></div>
             <BellIcon />
             <div className='user__actions'>
               <img src={'./images/user.png'} alt="user__icon" />

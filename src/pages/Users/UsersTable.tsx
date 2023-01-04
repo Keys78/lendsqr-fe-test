@@ -77,7 +77,7 @@ const UsersTable = ({ tableData }: Props) => {
     ))
 
 
-
+// muber per-page control
     const arr = Array.from({ length: 5 }, (_, i) => (i + 1) * 5)
     const arrOfStr = arr.map(num => { return String(num); });
     function autoSetUserPerPage(item: any, index: number) {
