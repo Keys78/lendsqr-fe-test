@@ -12,7 +12,7 @@ function App() {
 
   return (
     <Suspense fallback={renderLoader()}>
-      <ToastContainer />
+      <ToastContainer limit={2} />
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />

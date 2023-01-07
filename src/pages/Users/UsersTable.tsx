@@ -12,6 +12,7 @@ import { motion } from 'framer-motion';
 import '../Users/users.scss'
 import Pagination from 'components/Pagination/Pagination';
 import CaretDownIcon from 'components/Icons/CaretDownIcon';
+import { toast } from 'react-toastify';
 
 
 interface Props {
@@ -68,8 +69,8 @@ const UsersTable = ({ tableData }: Props) => {
                         transition={{ duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96], delay: i * 0.1 }}
                         className='action__prompt'>
                         <a href={`users/${user.id}`}><div><EyeIcon /> View Details</div></a>
-                        <div><BlackListIcon /> Blacklist User</div>
-                        <div><ActivateUserIcon /> Activate User</div>
+                        <div onClick={() => toast.error('endpoint unavialable')}><BlackListIcon /> Blacklist User</div>
+                        <div onClick={() => toast.error('endpoint unavialable')}><ActivateUserIcon /> Activate User</div>
                     </motion.div>
                 }
             </td>
